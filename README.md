@@ -2,7 +2,11 @@
 java agent for method invoke inspection
 
 usage:
- -javaagent:{YOU PATH}/my-agent.jar
+ -DagentTarget={PACKAGE YOU WANT} -javaagent:{YOU PATH}/my-agent.jar 
+ 
+eg:
+ -javaagent:dark_agent/my-agent.jar
+ -DagentTarget=org.apache.zookeeper.server
 
 output (from zookeeper)：
 > [main=1]--> protected void org.apache.zookeeper.server.quorum.QuorumPeerMain.initializeAndRun(java.lang.String[]) throws org.apache.zookeeper.server.quorum.QuorumPeerConfig$ConfigException,java.io.IOException,org.apache.zookeeper.server.admin.AdminServer$AdminServerException 
