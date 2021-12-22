@@ -1,0 +1,7 @@
+Mainifest-Version: 1.0
+Premain-Class: org.ck.dark.DarkAgentPreMain
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+
+
+
