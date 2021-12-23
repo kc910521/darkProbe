@@ -6,14 +6,14 @@ such as ZooKeeper, ElasticSearch, RocketMQ etc.
 
 ## usage:
 add to VM options:
->  -javaagent:{YOU AGENT JAR PATH NAME}.jar  -DinspectPackage={PACKAGE NAMES YOU MONITOR} 
+>  -javaagent:{YOU AGENT JAR PATH NAME}/dark-probe.jar  -DinspectPackage={PACKAGE NAMES YOU MONITOR} 
  
 ## example:
  
  we can show you how this javaAgent affects ZooKeeper.
  
 **step 1: add to zookeeper VM startup parameters.**
- >  -javaagent:dark_agent/my-agent.jar
+ >  -javaagent:/home/work/??/dark-probe.jar
     -DinspectPackage=org.apache.zookeeper.server
     
  **step 2: run the ZooKeeper source code :**
