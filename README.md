@@ -1,4 +1,4 @@
-# darkAgent
+# darkProbe
 this is a javaAgent for method invoking chain inspection, 
 you can use it in learning principle of java middleware, 
 such as ZooKeeper, ElasticSearch, RocketMQ etc.  
@@ -57,7 +57,7 @@ meaning a new root method invoked (may from a new Thread)
  (_    ___    /~"
   (_)_)  (_)_)
 ~~~  Mama never worry about your study! 
-                           ~~~~~~~~~~~~ DARK_AGENT
+                           ~~~~~~~~~~~~ DARK_PROBE
 ```
 
 

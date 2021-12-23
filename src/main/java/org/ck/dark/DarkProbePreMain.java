@@ -22,7 +22,7 @@ import java.util.List;
  * @Description main here
  * @Date 下午7:09 21-12-20
  **/
-public class DarkAgentPreMain {
+public class DarkProbePreMain {
 
 
     private final static AgentBuilder.Listener listener = new MaAgentListener();
@@ -35,7 +35,7 @@ public class DarkAgentPreMain {
                 "(\\,--------'()'--o\n" +
                 " (_    ___    /~\"\n" +
                 "  (_)_)  (_)_)\n" +
-                "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DARK_AGENT");
+                "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DARK_PROBE");
         ElementMatcher.Junction<NamedElement> namedElementJunction = vmConfigExecutor.inspectPackageOr().and(
                 vmConfigExecutor.ignorePackageAnd());
         new AgentBuilder.Default().type(namedElementJunction).transform(transformer).with(listener).installOn(inst);
