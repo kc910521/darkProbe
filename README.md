@@ -1,22 +1,63 @@
 # darkAgent
-java agent for method invoke inspection
+this is a javaAgent for method invoking chain inspection, 
+you can use it in learning principle of java middleware, 
+such as ZooKeeper, ElasticSearch, RocketMQ etc.  
 
-usage:
- -DagentTarget={PACKAGE YOU WANT} -javaagent:{YOU PATH}/my-agent.jar 
+
+## usage:
+add to VM options:
+>  -javaagent:{YOU AGENT JAR PATH NAME}.jar  -DinspectPackage={PACKAGE NAMES YOU MONITOR} 
  
-eg:
- -javaagent:dark_agent/my-agent.jar
- -DagentTarget=org.apache.zookeeper.server
+## example:
+ 
+ we can show you how this javaAgent affects ZooKeeper.
+ 
+**step 1: add to zookeeper VM startup parameters.**
+ >  -javaagent:dark_agent/my-agent.jar
+    -DinspectPackage=org.apache.zookeeper.server
+    
+ **step 2: run the ZooKeeper source code :**
+ ```java
+    // RUN org.apache.zookeeper.server.quorum.QuorumPeerMain#main
+    public static void main(String[] args) {
+        QuorumPeerMain main = new QuorumPeerMain();
+        
+        main.initializeAndRun(args);
+        // ...
+            
+        
+    }
 
-output (from zookeeper)：
-> [main=1]--> protected void org.apache.zookeeper.server.quorum.QuorumPeerMain.initializeAndRun(java.lang.String[]) throws org.apache.zookeeper.server.quorum.QuorumPeerConfig$ConfigException,java.io.IOException,org.apache.zookeeper.server.admin.AdminServer$AdminServerException 
-|-[1] ------> public void org.apache.zookeeper.server.quorum.QuorumPeerConfig.parse(java.lang.String) throws org.apache.zookeeper.server.quorum.QuorumPeerConfig$ConfigException 
-|-[1] --------> public org.apache.zookeeper.server.util.VerifyingFileFactory$Builder org.apache.zookeeper.server.util.VerifyingFileFactory$Builder.warnForRelativePath() 
-|-[1] --------> public org.apache.zookeeper.server.util.VerifyingFileFactory$Builder org.apache.zookeeper.server.util.VerifyingFileFactory$Builder.failForNonExistingPath() 
-|-[1] --------> public org.apache.zookeeper.server.util.VerifyingFileFactory org.apache.zookeeper.server.util.VerifyingFileFactory$Builder.build() 
-|-[1] --------> public java.io.File org.apache.zookeeper.server.util.VerifyingFileFactory.create(java.lang.String) 
-|-[1] ----------> public java.io.File org.apache.zookeeper.server.util.VerifyingFileFactory.validate(java.io.File) 
-|-[1] ------------> private void org.apache.zookeeper.server.util.VerifyingFileFactory.doWarnForRelativePath(java.io.File) 
-|-[1] ------------> private void org.apache.zookeeper.server.util.VerifyingFileFactory.doFailForNonExistingPath(java.io.File) 
-|-[1] --------> public void org.apache.zookeeper.server.quorum.QuorumPeerConfig.parseProperties(java.util.Properties) throws java.io.IOException,org.apache.zookeeper.server.quorum.QuorumPeerConfig$ConfigException 
-|-[1] ----------> public org.apache.zookeeper.server.util.VerifyingFileFactory$Builder org.apache.zookeeper.server.util.VerifyingFileFactor
+```
+ **step 3: console will output (from zookeeper)：**
+```text
+↗---------↘↙---↖
+[main]go!↑↑--> org.apache.zookeeper.server.quorum.QuorumPeerMain#main(String[], 
+[main]--------> org.apache.zookeeper.server.quorum.QuorumPeerMain#initializeAndRun(String[], 
+[main]----------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parse(String, 
+[main]------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String, 
+[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File, 
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doFailForNonExistingPath(File, 
+[main]------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parseProperties(Properties, 
+[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String, 
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File, 
+[main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
+```
+
+every "↗---------↘↙---↖" 
+meaning a new root method invoked (may from a new Thread)
+
+--
+
+
+```text
+
+(\,--------'()'--o
+ (_    ___    /~"
+  (_)_)  (_)_)
+~~~  Mama never worry about your study! 
+                           ~~~~~~~~~~~~ DARK_AGENT
+```
+
+
