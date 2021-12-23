@@ -12,9 +12,11 @@
 ```
 
 
-DarkProbe is a javaAgent for method invoking chain inspection, 
-you can use it in learning principle of java middleware, 
+DarkProbe is a javaAgent for inspecting method invoking chains in GLOBAL VIEWs, 
+you can use it in learning principle of java middleware,   
 such as ZooKeeper, ElasticSearch, RocketMQ etc.  
+
+
 
 
 ## usage:
@@ -58,8 +60,29 @@ add to VM options:
 [main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
 ```
 
-every "↗---------↘↙---↖" 
-meaning a new root method invoked (may from a new Thread)
+every meaning a new root method invoked (may from a new Thread),  
+the template is:
+```text
+"↗---------↘↙---↖" 
+[{thread name}]go↑↑ {1st root Class and method}
+[{thread name}]--------> {2th Class and method}
+[{thread name}]------------> {3rd Class and method}
+[{thread name}]------------> {3rd Class and method}
+[{thread name}]--------------> {4th Class and method}
+[{thread name}]--------> {2th Class and method}
+```
+
+
+if you are boring to see  'org.apache.zookeeper.server.metric.AvgMinMaxCounter' 
+and 'org.apache.zookeeper.server.metric.AvgMinMaxPercentileCounter'   
+(**or some Class cause circulation deadly** )
+,just add VM options:
+```text
+-DignorePackage=org.apache.zookeeper.server.metric.AvgMinMaxCounter,org.apache.zookeeper.server.metric.AvgMinMaxPercentileCounter
+
+```
+
+
 
 --
 

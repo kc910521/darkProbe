@@ -45,7 +45,7 @@ public class DarkProbePreMain {
 
     final static AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule) -> {
         ElementMatcher.Junction<MethodDescription> methodDescriptionJunction = vmConfigExecutor.ignoreMethodAnd();
-        return builder.method(methodDescriptionJunction).intercept(Advice.to(InvokeChain.class));
+        return builder.topLevelType().method(methodDescriptionJunction).intercept(Advice.to(InvokeChain.class));
     };
 
 
