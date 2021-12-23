@@ -60,8 +60,8 @@ add to VM options:
 [main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
 ```
 
-every meaning a new root method invoked (may from a new Thread),  
-the template is:
+'1st root Class and method' meaning a new root method invoked (may from a new Thread),  
+ The console template is:
 ```text
 "↗---------↘↙---↖" 
 [{thread name}]go↑↑ {1st root Class and method}
