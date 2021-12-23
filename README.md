@@ -1,5 +1,18 @@
 # darkProbe
-this is a javaAgent for method invoking chain inspection, 
+
+
+
+```text
+
+(\,--------'()'--o
+ (_    ___    /~"
+  (_)_)  (_)_)
+~~~  Mama never worry about your study! 
+                           ~~~~~~~~~~~~ DARK_PROBE
+```
+
+
+DarkProbe is a javaAgent for method invoking chain inspection, 
 you can use it in learning principle of java middleware, 
 such as ZooKeeper, ElasticSearch, RocketMQ etc.  
 
@@ -32,7 +45,7 @@ add to VM options:
  **step 3: console will output (from zookeeper)：**
 ```text
 ↗---------↘↙---↖
-[main]go!↑↑--> org.apache.zookeeper.server.quorum.QuorumPeerMain#main(String[], 
+[main]go↑↑ org.apache.zookeeper.server.quorum.QuorumPeerMain#main(String[], 
 [main]--------> org.apache.zookeeper.server.quorum.QuorumPeerMain#initializeAndRun(String[], 
 [main]----------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parse(String, 
 [main]------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String, 
@@ -49,15 +62,5 @@ every "↗---------↘↙---↖"
 meaning a new root method invoked (may from a new Thread)
 
 --
-
-
-```text
-
-(\,--------'()'--o
- (_    ___    /~"
-  (_)_)  (_)_)
-~~~  Mama never worry about your study! 
-                           ~~~~~~~~~~~~ DARK_PROBE
-```
 
 
