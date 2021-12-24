@@ -25,17 +25,26 @@ import java.util.List;
 public class DarkProbePreMain {
 
 
-    private final static AgentBuilder.Listener listener = new MaAgentListener();
+    private static AgentBuilder.Listener listener;
 
-    private final static VMConfigExecutor vmConfigExecutor = new VMConfigExecutor();
+    private static VMConfigExecutor vmConfigExecutor;
+
+    private static String banner = "\n" +
+            "            __\n" +
+            "(\\,--------'()'--o\n" +
+            " (_    ___    /~\"\n" +
+            "  (_)_)  (_)_)\n";
 
     public static void premain(String arg, Instrumentation inst) {
-        System.out.println("\n" +
-                "            __\n" +
-                "(\\,--------'()'--o\n" +
-                " (_    ___    /~\"\n" +
-                "  (_)_)  (_)_)\n" +
-                "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DARK_PROBE");
+        System.out.println("arg:" + arg);
+        vmConfigExecutor = new VMConfigExecutor(arg);
+        listener = new MaAgentListener();
+        final AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule) -> {
+            ElementMatcher.Junction<MethodDescription> methodDescriptionJunction = vmConfigExecutor.ignoreMethodAnd();
+            return builder.topLevelType().method(methodDescriptionJunction).intercept(Advice.to(InvokeChain.class));
+        };
+        System.out.println(
+                DarkProbePreMain.banner + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DARK_PROBE");
         ElementMatcher.Junction<NamedElement> namedElementJunction = vmConfigExecutor.inspectPackageOr().and(
                 vmConfigExecutor.ignorePackageAnd());
         new AgentBuilder.Default().type(namedElementJunction).transform(transformer).with(listener).installOn(inst);
@@ -43,10 +52,6 @@ public class DarkProbePreMain {
     }
 
 
-    final static AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule) -> {
-        ElementMatcher.Junction<MethodDescription> methodDescriptionJunction = vmConfigExecutor.ignoreMethodAnd();
-        return builder.topLevelType().method(methodDescriptionJunction).intercept(Advice.to(InvokeChain.class));
-    };
 
 
 }

@@ -1,5 +1,6 @@
-Mainifest-Version: 1.0
+Manifest-Version: 1.0
 Premain-Class: org.ck.dark.DarkProbePreMain
+Agent-Class: org.ck.dark.DarkProbeAttachMain
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
 

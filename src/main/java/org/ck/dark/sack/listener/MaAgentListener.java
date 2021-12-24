@@ -37,29 +37,29 @@ public class MaAgentListener implements AgentBuilder.Listener {
     // 所有方法调用
     @Override
     public void onDiscovery(String s, ClassLoader classLoader, JavaModule javaModule, boolean b) {
-//        System.out.println("onDiscovery:" + s);
+        System.out.println("onDiscovery:" + s);
     }
     // 目标
     @Override
     public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, boolean b, DynamicType dynamicType) {
-//        System.out.println("onTransformation:" + typeDescription);
+        System.out.println("onTransformation:" + typeDescription);
 
     }
     // 非目标
     @Override
     public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, boolean b) {
-//        System.out.println("onIgnored:" + typeDescription);
+        System.out.println("onIgnored:" + typeDescription);
 
     }
 
     @Override
     public void onError(String s, ClassLoader classLoader, JavaModule javaModule, boolean b, Throwable throwable) {
-//        System.out.println("onError:" + s);
+        System.out.println("onError:" + s);
     }
     // 所有方法调用
     @Override
     public void onComplete(String s, ClassLoader classLoader, JavaModule javaModule, boolean b) {
-//        System.out.println("onComplete:" + s);
+        System.out.println("onComplete:" + s);
 
 
     }

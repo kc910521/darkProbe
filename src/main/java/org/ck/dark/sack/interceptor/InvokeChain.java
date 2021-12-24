@@ -57,6 +57,7 @@ public class InvokeChain {
 
     @Advice.OnMethodEnter
     public static void before(@Advice.Origin Method method) {
+        System.out.println("ck_method:" + method);
         int afterIncr = CounterThreadLocalUtil.incr(1);
         // todo: Invoking getThreadId may occur StackOverflow Exception
         Thread currThread = Thread.currentThread();

@@ -5,10 +5,9 @@ import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.matcher.ElementMatchers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Author caikun
@@ -49,8 +48,8 @@ public class VMConfigExecutor {
 
     }
 
-    public VMConfigExecutor() {
-        load();
+    public VMConfigExecutor(String agentParams) {
+        loadFrom(agentParams);
     }
 
     public ElementMatcher.Junction<NamedElement> inspectPackageOr() {
@@ -65,14 +64,23 @@ public class VMConfigExecutor {
         return ElementMatchers.not(ignoreMethods.stream().map(ElementMatchers::hasMethodName).reduce(ElementMatcher.Junction::or).get());
     }
 
+    /**
+     * split a:123&b=uu
+     * to
+     * map {a=123}, {b=uu}
+     *
+     * @param agentParams
+     */
+    protected void loadFrom(String agentParams) {
+        Map<String, String> properties = Stream.of(agentParams.trim().split("&")).map(s -> s.split("=")).collect(Collectors.toMap(d2 -> d2[0], d2 -> d2[1]));
+        System.out.println("params load: " + properties);
+        load(properties.get(VM_KEY_NEED_PACKAGE), properties.get(VM_KEY_IGNORE_PACKAGE), properties.get(VM_KEY_IGNORE_METHOD));
+    }
 
     /**
-     * load data from System VM
+     * load data from params VM
      */
-    protected void load() {
-        String property1 = System.getProperty(VM_KEY_NEED_PACKAGE);
-        String property2 = System.getProperty(VM_KEY_IGNORE_PACKAGE);
-        String property3 = System.getProperty(VM_KEY_IGNORE_METHOD);
+    protected void load(String property1, String property2, String property3) {
         if (!Objects.isNull(property1) && !Objects.equals("", property1)) {
             inspectPackage.addAll(Arrays.asList(property1.split(",")));
         } else {
