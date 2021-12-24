@@ -1,4 +1,4 @@
-# darkProbe
+# Dark Probe
 
 
 
@@ -60,22 +60,21 @@ add to VM options:
 [main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
 ```
 
-'1st root Class and method' meaning a new root method invoked (may from a new Thread),  
- The console template is:
+
+ The console outputs template is:
 ```text
 "↗---------↘↙---↖" 
 [{thread name}]go↑↑ {1st root Class and method}
-[{thread name}]--------> {2th Class and method}
-[{thread name}]------------> {3rd Class and method}
-[{thread name}]------------> {3rd Class and method}
-[{thread name}]--------------> {4th Class and method}
-[{thread name}]--------> {2th Class and method}
+[{thread name}]--------> {2nd Class and method after 1st}
+[{thread name}]------------> {3rd Class and method after 2nd}
+[{thread name}]--------------> {4th Class and method after 3rd}
 ```
+'1st root Class and method' meaning a new root method invoked (may from a new Thread),    
 
 
-if you are boring to see  'org.apache.zookeeper.server.metric.AvgMinMaxCounter' 
+If you are boring to see  'org.apache.zookeeper.server.metric.AvgMinMaxCounter' 
 and 'org.apache.zookeeper.server.metric.AvgMinMaxPercentileCounter'   
-(**or some Class cause circulation deadly** )
+(**or some class cause deadly recursive call** )
 ,just add VM options:
 ```text
 -DignorePackage=org.apache.zookeeper.server.metric.AvgMinMaxCounter,org.apache.zookeeper.server.metric.AvgMinMaxPercentileCounter
@@ -84,6 +83,11 @@ and 'org.apache.zookeeper.server.metric.AvgMinMaxPercentileCounter'
 
 
 
---
+## core
+- JDK 1.8
+- java instruments
+- byteBuddy(bytebuddy.asm) 
+- java.lang.ThreadLocal
+
 
 
