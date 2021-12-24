@@ -53,37 +53,7 @@ public class InvokeChain {
     private static final String formatTemplateBody = "[%s]-%s---> %s#%s(%s";
 
     private static final String appender = "--";
-    // @SuperMethod
-    // MethodCall
-//    @RuntimeType
-//    public static Object intercept(@Origin Method method,
-//                                   @SuperCall Callable<?> callable) {
-//        int afterIncr = CounterThreadLocalUtil.incr(1);
-//        long tid = Thread.currentThread().getId();
-//        if (afterIncr == 1) {
-//            System.out.println(String.format(formatTemplateHead,
-//                    Thread.currentThread().getName(),
-//                    tid,
-//                    method));
-//        } else {
-//            StringBuilder sb = new StringBuilder();
-//            for (int i = 0; i < afterIncr; i++) {
-//                sb.append("--");
-//            }
-//            System.out.println(String.format(formatTemplateBody,
-//                    tid,
-//                    sb.toString(),
-//                    method));
-//        }
-//        try {
-//            // 原有函数执行
-//            return callable.call();
-//        } catch (Throwable e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            CounterThreadLocalUtil.incr(-1);
-//        }
-//    }
+
 
     @Advice.OnMethodEnter
     public static void before(@Advice.Origin Method method) {
@@ -120,6 +90,39 @@ public class InvokeChain {
         CounterThreadLocalUtil.incr(-1);
     }
 
+
+
+    // @SuperMethod
+    // MethodCall
+//    @RuntimeType
+//    public static Object intercept(@Origin Method method,
+//                                   @SuperCall Callable<?> callable) {
+//        int afterIncr = CounterThreadLocalUtil.incr(1);
+//        long tid = Thread.currentThread().getId();
+//        if (afterIncr == 1) {
+//            System.out.println(String.format(formatTemplateHead,
+//                    Thread.currentThread().getName(),
+//                    tid,
+//                    method));
+//        } else {
+//            StringBuilder sb = new StringBuilder();
+//            for (int i = 0; i < afterIncr; i++) {
+//                sb.append("--");
+//            }
+//            System.out.println(String.format(formatTemplateBody,
+//                    tid,
+//                    sb.toString(),
+//                    method));
+//        }
+//        try {
+//            // 原有函数执行
+//            return callable.call();
+//        } catch (Throwable e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//            CounterThreadLocalUtil.incr(-1);
+//        }
+//    }
 
 
 }

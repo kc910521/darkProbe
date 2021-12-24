@@ -54,15 +54,15 @@ public class VMConfigExecutor {
     }
 
     public ElementMatcher.Junction<NamedElement> inspectPackageOr() {
-        return inspectPackage.stream().map(ElementMatchers::nameStartsWith).reduce((x, y) -> x.or(y)).get();
+        return inspectPackage.stream().map(ElementMatchers::nameStartsWith).reduce(ElementMatcher.Junction::or).get();
     }
 
     public ElementMatcher.Junction<NamedElement> ignorePackageAnd() {
-        return ElementMatchers.not(ignorePackage.stream().map(ElementMatchers::nameContainsIgnoreCase).reduce((x, y) -> x.or(y)).get());
+        return ElementMatchers.not(ignorePackage.stream().map(ElementMatchers::nameContainsIgnoreCase).reduce(ElementMatcher.Junction::or).get());
     }
 
     public ElementMatcher.Junction<MethodDescription> ignoreMethodAnd() {
-        return ElementMatchers.not(ignoreMethods.stream().map(ElementMatchers::hasMethodName).reduce((x, y) -> x.or(y)).get());
+        return ElementMatchers.not(ignoreMethods.stream().map(ElementMatchers::hasMethodName).reduce(ElementMatcher.Junction::or).get());
     }
 
 
