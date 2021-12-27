@@ -44,8 +44,9 @@ public class VMConfigExecutor {
         ignoreMethods.add("hashCode");
         ignoreMethods.add("compare");
 
-        ignorePackage.add("$");
         ignorePackage.add("org.ck.dark");
+        ignorePackage.add("java.lang");
+        ignorePackage.add("net.bytebuddy");
 
     }
 
