@@ -49,8 +49,8 @@ public class InvokeChain {
 
     private static final String formatTemplateHead =
             "↗---------↘↙---↖\n" +
-            "[%s]go!↑↑ %s#%s(%s";
-    private static final String formatTemplateBody = "[%s]-%s---> %s#%s(%s";
+            "[%s]go!↑↑ %s#%s%s";
+    private static final String formatTemplateBody = "[%s]-%s---> %s#%s%s";
 
     private static final String appender = "--";
 

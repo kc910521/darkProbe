@@ -47,17 +47,24 @@ add to VM options:
  **step 3: console will output (from zookeeper)：**
 ```text
 ↗---------↘↙---↖
-[main]go↑↑ org.apache.zookeeper.server.quorum.QuorumPeerMain#main(String[], 
-[main]--------> org.apache.zookeeper.server.quorum.QuorumPeerMain#initializeAndRun(String[], 
-[main]----------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parse(String, 
-[main]------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String, 
-[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File, 
-[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
-[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doFailForNonExistingPath(File, 
-[main]------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parseProperties(Properties, 
-[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String, 
-[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File, 
-[main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File, 
+[main]go!↑↑ org.apache.zookeeper.server.quorum.QuorumPeerMain#main((String[])
+[main]--------> org.apache.zookeeper.server.quorum.QuorumPeerMain#initializeAndRun(String[])
+[main]----------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parse(String)
+[main]------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String)
+[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File)
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File)
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doFailForNonExistingPath(File)
+[main]------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parseProperties(Properties)
+[main]--------------> org.apache.zookeeper.server.util.VerifyingFileFactory#create(String)
+[main]----------------> org.apache.zookeeper.server.util.VerifyingFileFactory#validate(File)
+[main]------------------> org.apache.zookeeper.server.util.VerifyingFileFactory#doWarnForRelativePath(File)
+[main]--------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#setupQuorumPeerConfig(boolean, Properties)
+[main]----------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#parseDynamicConfig(boolean, boolean, int, Properties)
+[main]------------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#createQuorumVerifier(boolean, Properties)
+[main]------------------> org.apache.zookeeper.server.quorum.flexible.QuorumMaj#getVotingMembers()
+[main]------------------> org.apache.zookeeper.server.quorum.flexible.QuorumMaj#getObservingMembers()
+[main]----------------> org.apache.zookeeper.server.quorum.QuorumPeerConfig#setupMyId()
+
 ```
 
 

@@ -1,5 +1,7 @@
 package org.ck.dark.sack.util;
 
+import java.util.StringJoiner;
+
 /**
  * @Author caikun
  * @Description
@@ -10,13 +12,17 @@ public class BaseTool {
     private BaseTool() {
     }
 
-
+    /**
+     * join to `(a, b, c)`
+     * @param types
+     * @return
+     */
     public static String stringifyTypes(Class<?>[] types) {
-        StringBuilder sb = new StringBuilder();
+        StringJoiner sj = new StringJoiner(", ", "(", ")");
         for (int i = types.length - 1; i >= 0; i--) {
-            sb.append(types[i].getSimpleName() + ", ");
+            sj.add(types[i].getSimpleName());
         }
-        return sb.toString();
+        return sj.toString();
     }
 
 
